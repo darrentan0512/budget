@@ -5,6 +5,7 @@ import MainHeader from './components/MainHeader';
 import NewEntryForm from './components/NewEntryForm';
 import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
+import EntryLine from './components/EntryLine';
 
 function App() {
   return (
@@ -14,42 +15,9 @@ function App() {
       <DisplayBalances />
 
       <MainHeader title='History' type='h3' />
-      <Segment color='red'>
-        <Grid columns={3} textAlign='right'>
-          <Grid.Row>
-            <Grid.Column width={10} textAlign='left'> Something </Grid.Column>
-            <Grid.Column width={3} textAlign='right'> $10.00 </Grid.Column>
-            <Grid.Column width={3}>
-              <Icon name="edit" />
-              <Icon name="trash" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
-      <Segment color='green'>
-        <Grid columns={3} textAlign='right'>
-          <Grid.Row>
-            <Grid.Column width={10} textAlign='left'> Something </Grid.Column>
-            <Grid.Column width={3} textAlign='right'> $20.00 </Grid.Column>
-            <Grid.Column width={3}>
-              <Icon name="edit" />
-              <Icon name="trash" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
-      <Segment color='red'>
-        <Grid columns={3} textAlign='right'>
-          <Grid.Row>
-            <Grid.Column width={10} textAlign='left'> Something </Grid.Column>
-            <Grid.Column width={3} textAlign='right'> $10.00 </Grid.Column>
-            <Grid.Column width={3}>
-              <Icon name="edit" />
-              <Icon name="trash" />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
+      <EntryLine description='income' value='10.00' isExpense={false} />
+      <EntryLine description='something' value='20.00' isExpense={false} />
+      <EntryLine description='something' value='10.00' isExpense={true} />
 
       <MainHeader title='Add new transaction' type='h3' />
       <NewEntryForm />

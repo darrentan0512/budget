@@ -1,43 +1,29 @@
 
-import { Container, Grid, Statistic, Segment, Icon, Form } from 'semantic-ui-react';
+import { Container, Grid, Segment, Icon } from 'semantic-ui-react';
 import './App.css';
 import MainHeader from './components/MainHeader';
-import ButtonSaveOrCancel from './components/ButtonSaveOrCancel';
+import NewEntryForm from './components/NewEntryForm';
+import DisplayBalance from './components/DisplayBalance';
 
 function App() {
   return (
     <Container>
       <MainHeader title='Test' />
-      <Statistic size='small'>
-        <Statistic.Label>Your Balance: </Statistic.Label>
-        <Statistic.Value>2,550.53</Statistic.Value>
-      </Statistic>
+      <DisplayBalance title='YOUR BALANCE' value='2,550.53' size='small' />
       <Segment textAlign='center'>
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
-              <Statistic size="tiny" color="green">
-                <Statistic.Label style={{ textAlign: 'left' }}>
-                  Income:
-                </Statistic.Label>
-                <Statistic.Value>1,045.50</Statistic.Value>
-              </Statistic>
+              <DisplayBalance title='INCOME' value='1253.54' color='green' size='tiny'/>
             </Grid.Column>
             <Grid.Column>
-              <Statistic size="tiny" color="red">
-                <Statistic.Label style={{ textAlign: 'left' }}>
-                  Expenses:
-                </Statistic.Label>
-                <Statistic.Value>
-                  623.50
-                </Statistic.Value>
-              </Statistic>
+              <DisplayBalance title='EXPENSES' value='623.50' color='red' size='tiny'/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
       </Segment>
 
-      <MainHeader title='History' type='h3'/> 
+      <MainHeader title='History' type='h3' />
       <Segment color='red'>
         <Grid columns={3} textAlign='right'>
           <Grid.Row>
@@ -75,18 +61,8 @@ function App() {
         </Grid>
       </Segment>
 
-      <MainHeader title='Add new transaction' type='h3'/> 
-      <Form unstackable>
-        <Form.Group>
-          <Form.Input
-            icon='tags'
-            width={12}
-            label='Description'
-            placeholder='New Shinny Thing' />
-          <Form.Input width={4} label='Value' placeholder="100.00" icon="dollar" iconPosition='left'></Form.Input>
-        </Form.Group>
-        <ButtonSaveOrCancel />
-      </Form>
+      <MainHeader title='Add new transaction' type='h3' />
+      <NewEntryForm />
     </Container>
   );
 }

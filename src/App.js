@@ -4,24 +4,14 @@ import './App.css';
 import MainHeader from './components/MainHeader';
 import NewEntryForm from './components/NewEntryForm';
 import DisplayBalance from './components/DisplayBalance';
+import DisplayBalances from './components/DisplayBalances';
 
 function App() {
   return (
     <Container>
       <MainHeader title='Test' />
       <DisplayBalance title='YOUR BALANCE' value='2,550.53' size='small' />
-      <Segment textAlign='center'>
-        <Grid columns={2} divided>
-          <Grid.Row>
-            <Grid.Column>
-              <DisplayBalance title='INCOME' value='1253.54' color='green' size='tiny'/>
-            </Grid.Column>
-            <Grid.Column>
-              <DisplayBalance title='EXPENSES' value='623.50' color='red' size='tiny'/>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Segment>
+      <DisplayBalances />
 
       <MainHeader title='History' type='h3' />
       <Segment color='red'>

@@ -7,6 +7,7 @@ import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
 import EntryLine from './components/EntryLine';
 import { useState } from 'react';
+import EntryLines from './components/EntryLines';
 
 var initialEntries = [
   {
@@ -42,14 +43,7 @@ function App() {
       <DisplayBalances />
 
       <MainHeader title='History' type='h3' />
-      {
-        entries.map((entry) => (
-          <EntryLine description={entry.description}
-            value={entry.value}
-            isExpense={entry.isExpense}
-          />
-        ))
-      }
+      <EntryLines entries={entries} />
 
       <MainHeader title='Add new transaction' type='h3' />
       <NewEntryForm />

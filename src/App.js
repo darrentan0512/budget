@@ -57,7 +57,7 @@ function App() {
 
   return (
     <Container>
-      <MainHeader title='Test' />
+      <MainHeader title='Budget App' />
       <DisplayBalance title='YOUR BALANCE' value='2,550.53' size='small' />
       <DisplayBalances />
 

@@ -7,6 +7,7 @@ import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
 import { useState } from 'react';
 import EntryLines from './components/EntryLines';
+import ModalEdit from './components/ModalEdit';
 
 var initialEntries = [
   {
@@ -39,6 +40,10 @@ var initialEntries = [
 function App() {
 
   const [entries, setEntries] = useState(initialEntries);
+  const [description, setDescription] = useState('');
+  const [value, setValue] = useState('');
+  const [isExpense, setIsExpense] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const deleteEntry = (id) => {
     const result = entries.filter(entry => entry.id !== id);
@@ -62,10 +67,22 @@ function App() {
       <DisplayBalances />
 
       <MainHeader title='History' type='h3' />
-      <EntryLines entries={entries} deleteEntry={deleteEntry} />
-
+      <EntryLines
+        entries={entries}
+        deleteEntry={deleteEntry}
+        setIsOpen={setIsOpen} 
+      />
+      <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen} />
       <MainHeader title='Add new transaction' type='h3' />
-      <NewEntryForm addEntry={addEntry} />
+      <NewEntryForm
+        addEntry={addEntry}
+        description={description}
+        value={value}
+        isExpense={isExpense}
+        setDescription={setDescription}
+        setValue={setValue}
+        setIsExpense={setIsExpense}
+      />
     </Container>
   );
 }

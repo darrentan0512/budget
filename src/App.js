@@ -5,7 +5,7 @@ import MainHeader from './components/MainHeader';
 import NewEntryForm from './components/NewEntryForm';
 import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
 
@@ -44,6 +44,18 @@ function App() {
   const [value, setValue] = useState('');
   const [isExpense, setIsExpense] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [entryId, setEntryId] = useState();
+
+  useEffect(() => {
+    if (!isOpen && entryId) {
+      const index = entries.findIndex(entry => entry.id === entryId);
+      const newEntries = [...entries];
+      newEntries[index].description = description;
+      newEntries[index].value = value;
+      newEntries[index].isExpense = isExpense;
+      setEntries(newEntries);
+    }
+  }, [isOpen, description, entries, entryId, isExpense, value]);
 
   const deleteEntry = (id) => {
     const result = entries.filter(entry => entry.id !== id);
@@ -60,6 +72,7 @@ function App() {
       setValue(entry.value);
       setIsExpense(entry.isExpense);
       setIsOpen(true);
+      setEntryId(id);
     }
   }
 

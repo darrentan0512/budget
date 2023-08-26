@@ -50,6 +50,19 @@ function App() {
     setEntries(result);
   }
 
+  const editEntry = (id) => {
+    console.log(id);
+    console.log(`Edit entry ${id}`);
+    if (id) {
+      const index = entries.findIndex(entry => entry.id === id);
+      const entry = entries[index];
+      setDescription(entry.description);
+      setValue(entry.value);
+      setIsExpense(entry.isExpense);
+      setIsOpen(true);
+    }
+  }
+
   const addEntry = (description, value, isExpense) => {
     const result = entries.concat({
       id: entries.length + 1,
@@ -70,9 +83,18 @@ function App() {
       <EntryLines
         entries={entries}
         deleteEntry={deleteEntry}
-        setIsOpen={setIsOpen} 
+        editEntry={editEntry}
       />
-      <ModalEdit isOpen={isOpen} setIsOpen={setIsOpen} />
+      <ModalEdit
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        addEntry={addEntry}
+        description={description}
+        value={value}
+        isExpense={isExpense}
+        setDescription={setDescription}
+        setValue={setValue}
+        setIsExpense={setIsExpense} />
       <MainHeader title='Add new transaction' type='h3' />
       <NewEntryForm
         addEntry={addEntry}

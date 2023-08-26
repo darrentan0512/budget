@@ -5,8 +5,6 @@ import EntryForm from './EntryForm';
 
 function NewEntryForm({ addEntry, description, value, isExpense, setDescription, setValue, setIsExpense }) {
 
-    console.log(isExpense);
-
     return (
         <Form unstackable>
             <EntryForm 

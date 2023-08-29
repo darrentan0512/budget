@@ -48,14 +48,16 @@ function App() {
 
   useEffect(() => {
     if (!isOpen && entryId) {
+      console.log(entryId);
       const index = entries.findIndex(entry => entry.id === entryId);
       const newEntries = [...entries];
       newEntries[index].description = description;
       newEntries[index].value = value;
       newEntries[index].isExpense = isExpense;
       setEntries(newEntries);
+      resetEntry();
     }
-  }, [isOpen, description, entries, entryId, isExpense, value]);
+  }, [isOpen]);
 
   const deleteEntry = (id) => {
     const result = entries.filter(entry => entry.id !== id);
@@ -76,7 +78,7 @@ function App() {
     }
   }
 
-  const addEntry = (description, value, isExpense) => {
+  const addEntry = () => {
     const result = entries.concat({
       id: entries.length + 1,
       description: description,
@@ -84,8 +86,14 @@ function App() {
       isExpense: isExpense
     })
     setEntries(result);
+    resetEntry();
   }
 
+  const resetEntry = () => {
+    setDescription('');
+    setValue('');
+    setIsExpense(true);
+  }
   return (
     <Container>
       <MainHeader title='Budget App' />

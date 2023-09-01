@@ -8,7 +8,7 @@ import DisplayBalances from './components/DisplayBalances';
 import { useState, useEffect } from 'react';
 import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
 var initialEntries = [
   {
@@ -79,19 +79,25 @@ function App() {
     console.log(`Total income is ${totalIncome} and total expense is ${totalExpense}`);
   }, [entries]);
 
-  const store = createStore((state = initialEntries, action) => {
+  const entriesReducer = ((state = initialEntries, action) => {
+    let newEntries;
     switch ( action.type) {
       case 'ADD_ENTRY':
-        const newEntries = state.concat({...action.payload});
+        newEntries = state.concat({...action.payload});
         return newEntries;
 
       case 'REMOVE_ENTRY':
-        const deleteEntry = state.filter(entry => entry.id !== action.payload.id);
-        return deleteEntry;
+        newEntries = state.filter(entry => entry.id !== action.payload.id);
+        return newEntries;
       default:
         return state;
     }
   });
+
+  const combinedReducers = combineReducers({
+    entries: entriesReducer,
+  })
+  const store = createStore(entriesReducer);
   
   store.subscribe(() => {
     console.log('store: ', store.getState());
@@ -109,7 +115,6 @@ function App() {
   }
 
   
-
   console.log('store after : ', store.getState());
 
   const addEntryRedux = (payload) => {

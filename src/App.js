@@ -8,6 +8,7 @@ import DisplayBalances from './components/DisplayBalances';
 import { useState, useEffect } from 'react';
 import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
+import { createStore } from 'redux';
 
 var initialEntries = [
   {
@@ -60,6 +61,7 @@ function App() {
       setEntries(newEntries);
       resetEntry();
     }
+    //eslint-disable-next-line
   }, [isOpen]);
 
   useEffect(() => {
@@ -76,6 +78,51 @@ function App() {
     setTotal(totalIncome - totalExpense);
     console.log(`Total income is ${totalIncome} and total expense is ${totalExpense}`);
   }, [entries]);
+
+  const store = createStore((state = initialEntries, action) => {
+    switch ( action.type) {
+      case 'ADD_ENTRY':
+        const newEntries = state.concat({...action.payload});
+        return newEntries;
+
+      case 'REMOVE_ENTRY':
+        const deleteEntry = state.filter(entry => entry.id !== action.payload.id);
+        return deleteEntry;
+      default:
+        return state;
+    }
+  });
+  
+  store.subscribe(() => {
+    console.log('store: ', store.getState());
+  })
+
+  const payload_add = {
+    id : 5,
+    description : 'Hello from redux',
+    value : 100,
+    isExpense : false
+  }
+
+  const payload_remove = {
+     id : 1
+  }
+
+  
+
+  console.log('store after : ', store.getState());
+
+  const addEntryRedux = (payload) => {
+    return { type : 'ADD_ENTRY', payload };
+  }
+
+  const removeEntryRedux = (id) => {
+    return { type : 'REMOVE_ENTRY', payload : { id } };
+  }
+
+  store.dispatch(addEntryRedux(payload_add));
+  store.dispatch(removeEntryRedux(1));
+  store.dispatch(removeEntryRedux(2));
 
   const deleteEntry = (id) => {
     const result = entries.filter(entry => entry.id !== id);

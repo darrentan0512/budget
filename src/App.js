@@ -16,7 +16,7 @@ function App() {
 
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
-  const [isExpense, setIsExpense] = useState('');
+  const [isExpense, setIsExpense] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [entryId, setEntryId] = useState();
   const [totalIncome, setTotalIncome] = useState(0);

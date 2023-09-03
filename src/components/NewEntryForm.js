@@ -2,8 +2,28 @@ import React from 'react';
 import { Form } from 'semantic-ui-react';
 import ButtonSaveOrCancel from './ButtonSaveOrCancel';
 import EntryForm from './EntryForm';
+import { addEntryRedux } from '../actions/entries.actions';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-function NewEntryForm({ addEntry, description, value, isExpense, setDescription, setValue, setIsExpense }) {
+function NewEntryForm() {
+
+    const [description, setDescription] = useState('');
+    const [value, setValue] = useState('');
+    const [isExpense, setIsExpense] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const addEntry = () => {dispatch(addEntryRedux({
+        id : 5,
+        description,
+        value,
+        isExpense
+    }))
+        setDescription('');
+        setValue('');
+        setIsExpense(false);
+    };
 
     return (
         <Form unstackable>

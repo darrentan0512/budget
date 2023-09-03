@@ -4,7 +4,7 @@ import entriesReducer from '../reducers/entries.reducer';
 
 const configureStore = () => {
     return createStore(
-        combinedReducers({
+        combineReducers({
             entries: entriesReducer
         })
     )

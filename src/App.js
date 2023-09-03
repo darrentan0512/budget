@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
 import { createStore, combineReducers } from 'redux';
+import { useSelector } from 'react-redux';
 
 var initialEntries = [
   {
@@ -49,6 +50,7 @@ function App() {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
   const [total, setTotal] = useState(0);
+  const entriesRedux = useSelector(state => state.entries);
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -79,55 +81,6 @@ function App() {
     console.log(`Total income is ${totalIncome} and total expense is ${totalExpense}`);
   }, [entries]);
 
-  const entriesReducer = ((state = initialEntries, action) => {
-    let newEntries;
-    switch ( action.type) {
-      case 'ADD_ENTRY':
-        newEntries = state.concat({...action.payload});
-        return newEntries;
-
-      case 'REMOVE_ENTRY':
-        newEntries = state.filter(entry => entry.id !== action.payload.id);
-        return newEntries;
-      default:
-        return state;
-    }
-  });
-
-  const combinedReducers = combineReducers({
-    entries: entriesReducer,
-  })
-  const store = createStore(entriesReducer);
-  
-  store.subscribe(() => {
-    console.log('store: ', store.getState());
-  })
-
-  const payload_add = {
-    id : 5,
-    description : 'Hello from redux',
-    value : 100,
-    isExpense : false
-  }
-
-  const payload_remove = {
-     id : 1
-  }
-
-  
-  console.log('store after : ', store.getState());
-
-  const addEntryRedux = (payload) => {
-    return { type : 'ADD_ENTRY', payload };
-  }
-
-  const removeEntryRedux = (id) => {
-    return { type : 'REMOVE_ENTRY', payload : { id } };
-  }
-
-  store.dispatch(addEntryRedux(payload_add));
-  store.dispatch(removeEntryRedux(1));
-  store.dispatch(removeEntryRedux(2));
 
   const deleteEntry = (id) => {
     const result = entries.filter(entry => entry.id !== id);
@@ -175,7 +128,7 @@ function App() {
 
       <MainHeader title='History' type='h3' />
       <EntryLines
-        entries={entries}
+        entries={entriesRedux}
         deleteEntry={deleteEntry}
         editEntry={editEntry}
       />

@@ -11,7 +11,6 @@ import ModalEdit from './components/ModalEdit';
 import { createStore, combineReducers } from 'redux';
 import { useSelector } from 'react-redux';
 
-
 function App() {
 
   const [description, setDescription] = useState('');
@@ -23,6 +22,7 @@ function App() {
   const [totalExpense, setTotalExpense] = useState(0);
   const [total, setTotal] = useState(0);
   const entries = useSelector(state => state.entries);
+  const isOpenRedux = useSelector(state => state.modals.isOpen);
 
   useEffect(() => {
     if (!isOpen && entryId) {
@@ -104,7 +104,7 @@ function App() {
         editEntry={editEntry}
       />
       <ModalEdit
-        isOpen={isOpen}
+        isOpen={isOpenRedux}
         setIsOpen={setIsOpen}
         addEntry={addEntry}
         description={description}

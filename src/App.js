@@ -16,11 +16,14 @@ function App() {
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
   const [total, setTotal] = useState(0);
+  const [entry, setEntry] = useState();
   const entries = useSelector(state => state.entries);
-  const isOpen = useSelector(state => state.modals.isOpen);
+  const {isOpen, id} = useSelector((state) => state.modals);
+
 
   useEffect(() => {
- 
+    const index = entries.findIndex(entry => entry.id === id)
+    setEntry(entries[index]);
     //eslint-disable-next-line
   }, [isOpen]);
 
@@ -50,7 +53,7 @@ function App() {
 
       <MainHeader title='History' type='h3' />
       <EntryLines entries={entries} />
-      <ModalEdit isOpen={isOpen}/>
+      <ModalEdit isOpen={isOpen} {...entry}/>
       <MainHeader title='Add new transaction' type='h3' />
       <NewEntryForm />
     </Container>

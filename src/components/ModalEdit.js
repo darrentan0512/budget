@@ -4,7 +4,7 @@ import EntryForm from './EntryForm'
 import { closeEditModal } from '../actions/modals.actions'
 import { useDispatch } from 'react-redux';
 
-function ModalEdit({ isOpen, setIsOpen, addEntry, description, value, isExpense, setDescription, setValue, setIsExpense }) {
+function ModalEdit({ isOpen, description, value, isExpense, setDescription, setValue, setIsExpense}) {
 
   const dispatch = useDispatch();
   

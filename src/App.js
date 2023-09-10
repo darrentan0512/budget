@@ -105,7 +105,7 @@ function App() {
       />
       <ModalEdit
         isOpen={isOpenRedux}
-        setIsOpen={setIsOpen}
+        setIsOpen={isOpenRedux}
         addEntry={addEntry}
         description={description}
         value={value}

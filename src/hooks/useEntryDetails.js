@@ -32,6 +32,7 @@ export default function useEntryDetails(desc="", val="", isExp=true) {
         dispatch(
             closeEditModal()
         );
+        resetValues();
     }
 
     const addEntry = () => {
@@ -41,10 +42,15 @@ export default function useEntryDetails(desc="", val="", isExp=true) {
             value,
             isExpense
         }))
+        resetValues();
+    };
+
+    const resetValues = () => {
         setDescription('');
         setValue('');
         setIsExpense(false);
-    };
+    }
+    
 
     return {
         description, setDescription, value, setValue, isExpense, setIsExpense, addEntry, updateEntry

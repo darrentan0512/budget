@@ -9,8 +9,9 @@ import { useState, useEffect } from 'react';
 import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
 import { createStore, combineReducers } from 'redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { getAllEntries } from './actions/entries.actions';
 
 function App() {
 
@@ -49,8 +50,10 @@ function App() {
 
   }
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchInitialData();
+    dispatch(getAllEntries());
   })
 
   return (

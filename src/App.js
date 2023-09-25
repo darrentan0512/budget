@@ -10,6 +10,7 @@ import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
 import { createStore, combineReducers } from 'redux';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function App() {
 
@@ -41,6 +42,16 @@ function App() {
     setTotal(totalIncome - totalExpense);
     console.log(`Total income is ${totalIncome} and total expense is ${totalExpense}`);
   }, [entries]);
+
+  async function fetchInitialData() {
+    const result = await axios.get('http://localhost:3002/entries');
+    console.log(result);
+
+  }
+
+  useEffect(() => {
+    fetchInitialData();
+  })
 
   return (
     <Container>
